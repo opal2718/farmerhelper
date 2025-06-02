@@ -21,25 +21,38 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
+      let botReply = '';
+
+      // 사용자 입력이 "안녕"일 경우 고정 응답
+      if (userText === '안녕') {
+        botReply = '안녕하세요? 무엇을 도와드릴까요?';
+      } else {
+        botReply = '(현재는 "안녕"에만 응답합니다)';
+      }
+
+      const botMessage: Message = { from: 'bot', text: botReply };
+      setMessages((prev) => [...prev, botMessage]);
+
+      // 번역 요청
       const res = await fetch('/api/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: userText }),
+        body: JSON.stringify({ text: botReply }),
       });
 
       const data = await res.json();
       const translated = data.translated;
 
-      const botResponse: Message = {
+      const translatedMessage: Message = {
         from: 'bot',
         text: `🔁 영어 번역: ${translated}`,
       };
 
-      setMessages((prev) => [...prev, botResponse]);
+      setMessages((prev) => [...prev, translatedMessage]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { from: 'bot', text: '⚠️ 번역 중 오류가 발생했습니다.'+error },
+        { from: 'bot', text: '⚠️ 번역 중 오류가 발생했습니다.' },
       ]);
     } finally {
       setLoading(false);
@@ -53,10 +66,12 @@ export default function ChatPage() {
         AI 다국어 챗봇
       </header>
 
-      {/* 채팅창 영역 */}
+      {/* 채팅창 */}
       <section className="flex-grow px-4 overflow-y-auto pb-4">
         {messages.length === 0 ? (
-          <p className="text-center text-gray-400 mt-10">메시지를 입력해 대화를 시작하세요.</p>
+          <p className="text-center text-gray-400 mt-10">
+            메시지를 입력해 대화를 시작하세요.
+          </p>
         ) : (
           <div className="flex flex-col space-y-2">
             {messages.map((msg, idx) => (
@@ -65,7 +80,7 @@ export default function ChatPage() {
                 className={`max-w-[75%] px-4 py-2 rounded-lg text-sm whitespace-pre-wrap ${
                   msg.from === 'user'
                     ? 'bg-blue-100 self-end text-right'
-                    : 'bg-green-100 self-end text-right'
+                    : 'bg-green-100 self-start text-left'
                 }`}
               >
                 {msg.text}
