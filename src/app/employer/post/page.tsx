@@ -4,6 +4,28 @@ import { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import { useRouter } from 'next/navigation';
 
+interface InputProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface TextareaProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+interface SelectProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: string[];
+}
+
 
 export default function PostJobPage() {
     const router = useRouter();
@@ -67,7 +89,7 @@ export default function PostJobPage() {
   );
 }
 
-function Input({ label, name, value, onChange }: any) {
+function Input({ label, name, value, onChange }: InputProps) {
   return (
     <div>
       <label className="block mb-1 font-medium text-sm">{label}</label>
@@ -82,7 +104,7 @@ function Input({ label, name, value, onChange }: any) {
   );
 }
 
-function Textarea({ label, name, value, onChange }: any) {
+function Textarea({ label, name, value, onChange }: TextareaProps) {
   return (
     <div>
       <label className="block mb-1 font-medium text-sm">{label}</label>
@@ -98,7 +120,7 @@ function Textarea({ label, name, value, onChange }: any) {
   );
 }
 
-function Select({ label, name, value, onChange, options }: any) {
+function Select({ label, name, value, onChange, options }: SelectProps) {
   return (
     <div>
       <label className="block mb-1 font-medium text-sm">{label}</label>
