@@ -8,13 +8,14 @@ export default function Home() {
     <main className="flex flex-col justify-between min-h-screen">
       {/* Hero 영역 */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-16 space-y-4">
-        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-          외국인 고용과 법률 지원,
-          <br />
-          한 번에 해결하세요
+        <h1 className="text-4xl font-extrabold tracking-tight text-blue-900">
+          상생이음
         </h1>
+        <h4 className="text-xl font-extrabold tracking-tight text-[#8E8EB9]">
+          AI 기반 외국인 근로 지원 플랫폼
+        </h4>
         <p className="text-lg text-gray-600 max-w-xl">
-          ‘대충 그거’는 농촌 고령층 고용주와 외국인 노동자를 위한
+          상생이음 농촌 고령층 고용주와 외국인 노동자를 위한
           <br className="hidden sm:block" />
           AI 기반 고용·계약·행정 지원 플랫폼입니다.
         </p>
