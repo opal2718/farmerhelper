@@ -52,7 +52,7 @@ export default function ChatPage() {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { from: 'bot', text: '⚠️ 번역 중 오류가 발생했습니다.' },
+        { from: 'bot', text: '⚠️ 번역 중 오류가 발생했습니다.'+error },
       ]);
     } finally {
       setLoading(false);
